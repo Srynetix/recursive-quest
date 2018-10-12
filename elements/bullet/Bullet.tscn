@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://elements/bullet/Bullet.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/bullet.png" type="Texture" id=2]
+
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource( 1 )
+speed = 800
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.452492, 0 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility", "texture" ]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -10, -10, 20, 20 )
+
