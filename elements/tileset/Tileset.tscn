@@ -1,0 +1,150 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/images/tileset.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16, 16 )
+
+[node name="Tileset" type="Node2D"]
+
+[node name="Sand1" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sand1" groups=[
+"walls",
+]]
+input_pickable = false
+collision_layer = 2
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sand1/StaticBody2D"]
+position = Vector2( 16, 16 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "shape" ]
+
+[node name="Sand2" type="Sprite" parent="."]
+position = Vector2( 32, 0 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 1
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="Sand3" type="Sprite" parent="."]
+position = Vector2( 64, 0 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 2
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="Sand4" type="Sprite" parent="."]
+position = Vector2( 96, 0 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 3
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="Sand5" type="Sprite" parent="."]
+position = Vector2( 128, 0 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 4
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="SandDirt1" type="Sprite" parent="."]
+position = Vector2( 0, 32 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 10
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="SandDirt2" type="Sprite" parent="."]
+position = Vector2( 32, 32 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 11
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="SandDirt3" type="Sprite" parent="."]
+position = Vector2( 64, 32 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 12
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="SandDirt4" type="Sprite" parent="."]
+position = Vector2( 96, 32 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 13
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="SandDirt5" type="Sprite" parent="."]
+position = Vector2( 128, 32 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 14
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="SandHole1" type="Sprite" parent="."]
+position = Vector2( 0, 64 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 20
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="SandHole2" type="Sprite" parent="."]
+position = Vector2( 32, 64 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 21
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="SandHole3" type="Sprite" parent="."]
+position = Vector2( 64, 64 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 22
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="SandHole4" type="Sprite" parent="."]
+position = Vector2( 96, 64 )
+texture = ExtResource( 1 )
+centered = false
+vframes = 10
+hframes = 10
+frame = 23
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+

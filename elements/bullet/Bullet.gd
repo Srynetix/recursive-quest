@@ -2,7 +2,7 @@ extends Node2D
 
 # Bullet script
 
-export (int) var speed = 800
+export (int) var speed = 1200
 
 var velocity = Vector2(0, 0)
 

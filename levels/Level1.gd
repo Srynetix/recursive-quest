@@ -1,6 +1,6 @@
 extends Node
 
-# Test level
+# Level 1
 
 func _connect_signals():
     $Spaceship.connect("shoot", self, "_on_Spaceship_shoot")
