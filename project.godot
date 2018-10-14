@@ -16,12 +16,15 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot Wild Jam 2"
-run/main_scene="res://tests/LevelTest.tscn"
+run/main_scene="res://screens/boot_screen/BootScreen.tscn"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 
 [autoload]
 
 Utils="*res://scripts/Utils.gd"
+GameState="*res://scripts/GameState.gd"
+Transition="*res://utils/transition/Transition.tscn"
 
 [debug]
 
@@ -113,6 +116,9 @@ drill={
 2d_physics/layer_2="Walls"
 2d_physics/layer_3="Zones"
 2d_physics/layer_4="Pyramid"
+2d_physics/layer_5="Bullets"
+2d_physics/layer_6="Rocks"
+2d_physics/layer_7="Barriers"
 
 [rendering]
 

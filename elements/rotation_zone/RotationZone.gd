@@ -14,9 +14,6 @@ enum Rotation {
 
 export (Rotation) var rotation_value = Rotation.E
 
-var orbit_velocity = 0.5
-var angular_velocity = 50
-
 func _set_label():
     var ch
     match rotation_value:
@@ -37,10 +34,11 @@ func _set_label():
         NE:
             ch = "z"
 
-    $Label.text = ch
+    if $Label.text != ch:
+        $Label.text = ch
 
 func _ready():
-    $Particles2D.process_material.orbit_velocity = orbit_velocity
-    $Particles2D.process_material.angular_velocity = angular_velocity
+    _set_label()
 
+func _process(delta):
     _set_label()

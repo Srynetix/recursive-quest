@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/images/pyramid.png" type="Texture" id=1]
-[ext_resource path="res://assets/images/particle.png" type="Texture" id=2]
+[ext_resource path="res://elements/shrink_zone/ShrinkZone.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/images/pyramid.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/particle.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 
@@ -150,9 +151,13 @@ audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Collision" ]
 
+[node name="ShrinkZone" parent="." instance=ExtResource( 1 )]
+scale = Vector2( 0.5, 0.5 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 0.675131 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -183,7 +188,7 @@ visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 7 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 normal_map = null
 h_frames = 1
 v_frames = 1
@@ -193,4 +198,28 @@ _sections_unfolded = [ "Drawing", "Process Material", "Time", "Transform", "Visi
 position = Vector2( 3.1257, 1.75868 )
 shape = SubResource( 8 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -1.18719, 14.6043 )
+enabled = true
+editor_only = false
+texture = ExtResource( 3 )
+offset = Vector2( 0, 0 )
+texture_scale = 5.0
+color = Color( 1, 1, 1, 1 )
+energy = 1.0
+mode = 0
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = false
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_buffer_size = 2048
+shadow_gradient_length = 0.0
+shadow_filter = 0
+shadow_filter_smooth = 0.0
+shadow_item_cull_mask = 1
 

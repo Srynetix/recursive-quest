@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/particle.png-99576a30685dd7b19c1d34e0a6b3c08b.stex"
+path="res://.import/rock.png-da0040f602a75df399f0976f4213e1ce.stex"
 
 [deps]
 
-source_file="res://assets/images/particle.png"
-dest_files=[ "res://.import/particle.png-99576a30685dd7b19c1d34e0a6b3c08b.stex" ]
+source_file="res://assets/images/rock.png"
+dest_files=[ "res://.import/rock.png-da0040f602a75df399f0976f4213e1ce.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/normal_map=0
 flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
-flags/anisotropic=true
+flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false

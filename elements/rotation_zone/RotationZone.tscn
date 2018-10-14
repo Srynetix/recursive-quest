@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://elements/rotation_zone/RotationZone.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/particle.png" type="Texture" id=2]
@@ -19,25 +19,10 @@ width = 2048
 curve = SubResource( 1 )
 _sections_unfolded = [ "curve" ]
 
-[sub_resource type="Curve" id=3]
-
-min_value = 0.0
-max_value = 1.0
-bake_resolution = 100
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.19427, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=4]
-
-flags = 4
-width = 2048
-curve = SubResource( 3 )
-_sections_unfolded = [ "curve" ]
-
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=3]
 
 render_priority = 0
 trail_divisor = 1
-trail_size_modifier = SubResource( 4 )
 emission_shape = 0
 flag_align_y = false
 flag_rotate_y = false
@@ -45,7 +30,7 @@ flag_disable_z = true
 spread = 180.0
 flatness = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 150.0
+initial_velocity = 100.0
 initial_velocity_random = 0.0
 angular_velocity = 50.0
 angular_velocity_random = 0.0
@@ -61,7 +46,7 @@ damping = 0.0
 damping_random = 0.0
 angle = 0.0
 angle_random = 0.0
-scale = 1.0
+scale = 0.5
 scale_random = 0.0
 scale_curve = SubResource( 2 )
 color = Color( 0.00392157, 1, 0.207843, 1 )
@@ -72,14 +57,14 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Angular Velocity", "Color", "Gravity", "Initial Velocity", "Linear Accel", "Scale", "Spread", "Trail", "scale_curve", "trail_size_modifier" ]
+_sections_unfolded = [ "Angular Velocity", "Color", "Gravity", "Initial Velocity", "Linear Accel", "Scale", "scale_curve" ]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 100, 100 )
+extents = Vector2( 75, 75 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=5]
 
 size = 128
 outline_size = 2
@@ -106,7 +91,7 @@ rotation_value = 0
 
 [node name="Particles2D" type="Particles2D" parent="."]
 emitting = true
-amount = 180
+amount = 90
 lifetime = 2.0
 one_shot = false
 preprocess = 0.0
@@ -118,15 +103,15 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 5 )
+process_material = SubResource( 3 )
 texture = ExtResource( 2 )
 normal_map = null
 h_frames = 1
 v_frames = 1
-_sections_unfolded = [ "Process Material", "Textures", "Time", "process_material" ]
+_sections_unfolded = [ "Process Material", "Time", "process_material" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 _sections_unfolded = [ "shape" ]
 
 [node name="Label" type="Label" parent="."]
@@ -144,7 +129,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 text = "s"
 align = 1
 valign = 1
@@ -159,8 +144,8 @@ editor_only = false
 texture = ExtResource( 4 )
 offset = Vector2( 0, 0 )
 texture_scale = 1.0
-color = Color( 1, 1, 1, 1 )
-energy = 1.5
+color = Color( 0, 1, 0.415686, 1 )
+energy = 1.0
 mode = 0
 range_height = 0.0
 range_z_min = -1024

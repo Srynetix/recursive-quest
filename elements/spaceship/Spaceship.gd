@@ -3,6 +3,7 @@ extends Area2D
 # Spaceship script.
 
 signal shoot(bullet, pos, dir)
+signal exploded
 signal dead
 signal win
 
@@ -11,7 +12,7 @@ enum Turret { LEFT, RIGHT }
 
 export (Vector2) var move_speed = Vector2(50, 200)
 export (float) var damping = 0.85
-export (float) var shoot_cooldown = 0.25
+export (float) var shoot_cooldown = 0.1
 export (float) var drill_cooldown = 0.75
 export (float) var drill_time = 1
 export (float) var invulnerability_time = 2
@@ -20,7 +21,7 @@ export (float) var rotation_speed = 1.5
 
 export (PackedScene) var Bullet
 
-var max_velocity = Vector2(500, 200)
+var max_velocity = Vector2(500, 300)
 
 var initial_velocity = Vector2(400, 0)
 var velocity = Vector2(0, 0)
@@ -34,6 +35,11 @@ var is_rotating = false
 var rotation_zone = null
 var rotation_target = 0
 var rotation_step = 0
+
+var message_system = load("res://elements/spaceship/MessageSystem.gd").new()
+
+func kill():
+    _set_state(State.DEAD)
 
 func _prepare_timers():
     $ShootCooldown.wait_time = shoot_cooldown
@@ -72,9 +78,10 @@ func _shoot():
 
     emit_signal("shoot", Bullet, pos, dir)
     $ShootCooldown.start()
+    $LaserSound.play()
     _change_turret()
 
-    set_state(State.IDLE)
+    _set_state(State.IDLE)
 
 func _start_rotation(zone):
     if is_rotating and rotation_zone != zone:
@@ -133,7 +140,7 @@ func _drill():
 func _hit():
     $InvulnerabilityTimer.start()
 
-func set_state(new_state):
+func _set_state(new_state):
     if state == new_state:
         return
 
@@ -183,12 +190,14 @@ func _handle_input():
     # Attacks
 
     if Input.is_action_pressed("shoot") and state == State.IDLE and can_shoot:
-        set_state(State.SHOOT)
+        _set_state(State.SHOOT)
 
     elif Input.is_action_pressed("drill") and state == State.IDLE and can_drill:
-        set_state(State.DRILL)
+        _set_state(State.DRILL)
 
 func _ready():
+    message_system.initialize($Label)
+
     _prepare_timers()
     _connect_signals()
 
@@ -198,7 +207,11 @@ func _ready():
 
     $Particles/Engine.emitting = true
 
+    message_system.show_message("Let's go !")
+
 func _process(delta):
+    message_system._process(delta)
+
     if state == State.DEAD or state == State.WIN:
         return
 
@@ -212,11 +225,15 @@ func _process(delta):
     position += final_velocity * delta
 
 func _explode():
+    message_system.show_message("Oops...")
+    $CrashSound.play()
+
     $Particles/Drill.emitting = false
     $Particles/Engine.emitting = false
     $Particles/Explosion.emitting = true
 
     $AnimationPlayer.play("explosion")
+    emit_signal("exploded")
 
     yield($AnimationPlayer, "animation_finished")
     emit_signal("dead")
@@ -237,18 +254,25 @@ func _on_DrillTimer_timeout():
     $Particles/Drill.emitting = false
 
     if !state in [State.DEAD, State.WIN]:
-        set_state(State.IDLE)
+        _set_state(State.IDLE)
 
 func _on_InvulnerabilityTimer_timeout():
-    set_state(State.IDLE)
+    _set_state(State.IDLE)
 
 func _on_body_entered(body):
     if body.is_in_group("walls"):
-        set_state(State.DEAD)
+        _set_state(State.DEAD)
+    elif body.is_in_group("rocks"):
+        _set_state(State.DEAD)
+    elif body.is_in_group("barriers"):
+        if state == State.DRILL:
+            body.explode()
+        else:
+            _set_state(State.DEAD)
 
 func _on_area_entered(area):
     if area.is_in_group("rotation_zone"):
+        $ZoneSound.play()
         _start_rotation(area)
-
     elif area.is_in_group("pyramid"):
-        set_state(State.WIN)
+        _set_state(State.WIN)

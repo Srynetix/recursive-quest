@@ -1,10 +1,14 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://elements/spaceship/Spaceship.gd" type="Script" id=1]
 [ext_resource path="res://elements/bullet/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/images/spaceship.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/particle.png" type="Texture" id=4]
-[ext_resource path="res://assets/images/light-mask.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/particle-large.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/BEBAS.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/crash.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/zone.wav" type="AudioStream" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -55,18 +59,6 @@ resource_name = "fade"
 length = 1.0
 loop = false
 step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Light2D:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
-}
 
 [sub_resource type="Animation" id=5]
 
@@ -109,18 +101,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Light2D:texture_scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 1.25 ]
-}
 
 [sub_resource type="Animation" id=6]
 
@@ -151,18 +131,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.5, 0.5 ), Vector2( 0.01, 0.01 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Light2D:texture_scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 10.1965 ),
-"update": 0,
-"values": [ 1.25, 0.1 ]
 }
 
 [sub_resource type="Gradient" id=7]
@@ -219,7 +187,7 @@ damping = 0.0
 damping_random = 0.0
 angle = 0.0
 angle_random = 0.0
-scale = 0.5
+scale = 0.25
 scale_random = 0.0
 scale_curve = SubResource( 10 )
 color_ramp = SubResource( 8 )
@@ -366,20 +334,29 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angular Velocity", "Emission Shape", "Initial Velocity", "color_ramp", "scale_curve" ]
 
+[sub_resource type="DynamicFont" id=22]
+
+size = 24
+outline_size = 1
+outline_color = Color( 0.286275, 0.0313726, 0.32549, 1 )
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 6 )
+
 [node name="Spaceship" type="Area2D"]
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-collision_mask = 14
+collision_mask = 46
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
 move_speed = Vector2( 50, 200 )
 damping = 0.85
-shoot_cooldown = 0.25
+shoot_cooldown = 0.1
 drill_cooldown = 0.75
 drill_time = 1
 invulnerability_time = 2
@@ -470,12 +447,13 @@ editor_draw_drag_margin = false
 _sections_unfolded = [ "Transform" ]
 
 [node name="Particles" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Engine" type="Particles2D" parent="Particles"]
 show_behind_parent = true
 position = Vector2( -8.5166, -0.283407 )
-emitting = false
-amount = 40
+emitting = true
+amount = 10
 lifetime = 0.75
 one_shot = false
 preprocess = 0.0
@@ -538,14 +516,15 @@ v_frames = 1
 _sections_unfolded = [ "Process Material", "Time", "process_material" ]
 
 [node name="Light2D" type="Light2D" parent="."]
+scale = Vector2( 2, 0.85 )
 enabled = true
 editor_only = false
 texture = ExtResource( 5 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.25
-color = Color( 1, 1, 1, 1 )
+offset = Vector2( 75, 0 )
+texture_scale = 0.8
+color = Color( 0.988235, 0.768627, 1, 1 )
 energy = 1.0
-mode = 3
+mode = 0
 range_height = 0.0
 range_z_min = -1024
 range_z_max = 1024
@@ -560,4 +539,59 @@ shadow_filter = 0
 shadow_filter_smooth = 0.0
 shadow_item_cull_mask = 1
 _sections_unfolded = [ "Transform" ]
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -75.0
+margin_top = -47.0
+margin_right = -10.0
+margin_bottom = -23.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 22 )
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Visibility", "custom_fonts/font" ]
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+volume_db = -10.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 0.732043
+bus = "Reverb Bus"
+area_mask = 1
+
+[node name="CrashSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Reverb Bus"
+area_mask = 1
+
+[node name="ZoneSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Reverb Bus"
+area_mask = 1
 
