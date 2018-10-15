@@ -2,6 +2,8 @@ extends Node
 
 # Level script
 
+export (String) var level_title = ""
+
 var Rock = preload("res://elements/rock/Rock.tscn")
 
 onready var HUD = $CanvasLayer/HUD
@@ -25,7 +27,7 @@ func _ready():
     # Update HUD
     GameState.update_hud(HUD)
     HUD.update_time_left(time_left)
-    HUD.show_main_message("Level 1 - Scale 1:1")
+    HUD.show_main_message(level_title)
 
     # Start timer
     $TimeLeftTimer.start()
@@ -33,8 +35,6 @@ func _ready():
     # Connect rocks
     for rock in $Rocks.get_children():
         rock.connect('exploded', self, '_on_Rock_exploded')
-
-    Player.message_system.show_message(str(base_time_left) + ' seconds...\n Let\'s go !')
 
 func _remove_life():
     GameState.remove_life()

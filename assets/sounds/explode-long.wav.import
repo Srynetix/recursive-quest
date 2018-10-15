@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/explode-long.wav-50169065f48fd3f54e86c95cd91fd45c.sample"
+
+[deps]
+
+source_file="res://assets/sounds/explode-long.wav"
+dest_files=[ "res://.import/explode-long.wav-50169065f48fd3f54e86c95cd91fd45c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

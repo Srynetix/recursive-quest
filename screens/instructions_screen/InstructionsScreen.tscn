@@ -127,6 +127,7 @@ rotation_value = 225
 position = Vector2( 639.705, 306.235 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -396,4 +397,10 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/anim = SubResource( 4 )
 blend_times = [  ]
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = true
 

@@ -114,7 +114,6 @@ shape = SubResource( 6 )
 _sections_unfolded = [ "shape" ]
 
 [node name="Light2D" type="Light2D" parent="."]
-visible = false
 enabled = true
 editor_only = false
 texture = ExtResource( 2 )

@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://screens/intro_screen/IntroScreen.gd" type="Script" id=1]
+[ext_resource path="res://elements/starfield/Starfield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://elements/pyramid/Pyramid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://elements/spaceship/Spaceship.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/fonts/BEBAS.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 28
+outline_size = 0
+outline_color = Color( 1, 1, 1, 1 )
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 5 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Animation" id=2]
+
+resource_name = "anim"
+length = 15.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spaceship:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 13.5, 14, 14.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 140, 355.081 ), Vector2( 310, 380 ), Vector2( 510, 360 ), Vector2( 465.955, 412.854 ), Vector2( 577.536, 357.064 ), Vector2( 609.835, 436.345 ), Vector2( 653.88, 351.191 ), Vector2( 733.161, 383.491 ), Vector2( 786.015, 371.745 ), Vector2( 756.652, 404.045 ), Vector2( 815.378, 351.191 ), Vector2( 877.041, 415.791 ), Vector2( 921.086, 433.409 ), Vector2( 965.131, 456.899 ), Vector2( 1024.2, 431.906 ), Vector2( 1024.2, 431.906 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pyramid:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 10.5, 15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1808.97, 312.936 ), Vector2( 1237.66, 230.477 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Spaceship:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 13.5, 14, 14.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.75, 0.75 ), Vector2( 0.5, 0.5 ), Vector2( 0.15, 0.15 ) ]
+}
+
+[node name="IntroScreen" type="Control"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+
+[node name="Starfield" parent="." instance=ExtResource( 2 )]
+
+[node name="Pyramid" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1808.97, 312.936 )
+scale = Vector2( 8, 8 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="Spaceship" parent="." instance=ExtResource( 4 )]
+position = Vector2( 140, 355.081 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+_sections_unfolded = [ "custom_constants" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="MarginContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1260.0
+margin_bottom = 700.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 1 )
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Size Flags", "Theme", "custom_colors", "custom_fonts", "custom_fonts/font" ]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+rotating = false
+current = false
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("..")
+autoplay = "anim"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/anim = SubResource( 2 )
+blend_times = [  ]
+

@@ -7,4 +7,5 @@ func _ready():
 
 func _process(delta):
     if Input.is_action_just_pressed("shoot"):
+        set_process(false)
         GameState.load_instructions_screen()

@@ -7,23 +7,21 @@ signal exploded
 signal dead
 signal win
 
-enum State { IDLE, SHOOT, DRILL, DEAD, STUN, WIN }
+enum State { IDLE, SHOOT, DRILL, DEAD, STUN, SHRUNK, WIN }
 enum Turret { LEFT, RIGHT }
 
 export (Vector2) var move_speed = Vector2(50, 200)
 export (float) var damping = 0.85
 export (float) var shoot_cooldown = 0.1
 export (float) var drill_cooldown = 0.75
-export (float) var drill_time = 1
-export (float) var invulnerability_time = 2
+export (float) var drill_time = 0.75
 export (float) var breaks_coef = 0.7
 export (float) var rotation_speed = 1.5
+export (Vector2) var max_velocity = Vector2(500, 300)
+export (Vector2) var initial_velocity = Vector2(400, 0)
 
 export (PackedScene) var Bullet
 
-var max_velocity = Vector2(500, 300)
-
-var initial_velocity = Vector2(400, 0)
 var velocity = Vector2(0, 0)
 var state = State.IDLE
 
@@ -45,13 +43,11 @@ func _prepare_timers():
     $ShootCooldown.wait_time = shoot_cooldown
     $DrillCooldown.wait_time = drill_cooldown
     $DrillTimer.wait_time = drill_time
-    $InvulnerabilityTimer.wait_time = invulnerability_time
 
 func _connect_signals():
     $ShootCooldown.connect("timeout", self, "_on_ShootCooldown_timeout")
     $DrillCooldown.connect("timeout", self, "_on_DrillCooldown_timeout")
     $DrillTimer.connect("timeout", self, "_on_DrillTimer_timeout")
-    $InvulnerabilityTimer.connect("timeout", self, "_on_InvulnerabilityTimer_timeout")
     connect("body_entered", self, "_on_body_entered")
     connect("area_entered", self, "_on_area_entered")
 
@@ -120,19 +116,12 @@ func _update_rotation(delta):
         rotation_target = deg2rad(int(rad2deg(rotation_target)) % 360)
 
 func _level_exit():
-    $Particles/Engine.emitting = false
-
-    $AnimationPlayer.play("shrink")
-    yield($AnimationPlayer, "animation_finished")
-
-    $AnimationPlayer.play("fade")
-    yield($AnimationPlayer, "animation_finished")
-
     emit_signal("win")
 
 func _drill():
     can_drill = false
 
+    $DrillSound.play()
     $AnimationPlayer.play("drill")
     $Particles/Drill.emitting = true
     $DrillTimer.start()
@@ -189,6 +178,9 @@ func _handle_input():
     ##########
     # Attacks
 
+    if state == State.SHRUNK:
+        return
+
     if Input.is_action_pressed("shoot") and state == State.IDLE and can_shoot:
         _set_state(State.SHOOT)
 
@@ -206,8 +198,6 @@ func _ready():
     can_drill = true
 
     $Particles/Engine.emitting = true
-
-    message_system.show_message("Let's go !")
 
 func _process(delta):
     message_system._process(delta)
@@ -256,14 +246,14 @@ func _on_DrillTimer_timeout():
     if !state in [State.DEAD, State.WIN]:
         _set_state(State.IDLE)
 
-func _on_InvulnerabilityTimer_timeout():
-    _set_state(State.IDLE)
-
 func _on_body_entered(body):
     if body.is_in_group("walls"):
         _set_state(State.DEAD)
     elif body.is_in_group("rocks"):
-        _set_state(State.DEAD)
+        if state == State.DRILL:
+            body.explode()
+        else:
+            _set_state(State.DEAD)
     elif body.is_in_group("barriers"):
         if state == State.DRILL:
             body.explode()
@@ -274,5 +264,15 @@ func _on_area_entered(area):
     if area.is_in_group("rotation_zone"):
         $ZoneSound.play()
         _start_rotation(area)
+    elif area.is_in_group("shrink_zone"):
+        $AnimationPlayer.play("shrink")
+        $Particles/Explosion.emitting = true
+        max_velocity /= 4
+        move_speed /= 4
+        initial_velocity /= 4
+        _set_state(State.SHRUNK)
     elif area.is_in_group("pyramid"):
         _set_state(State.WIN)
+    elif area.is_in_group("text_zone"):
+        message_system.show_message(area.text)
+        area.queue_free()

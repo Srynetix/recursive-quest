@@ -19,7 +19,9 @@ var message_hide_delay = 2
 func initialize(label_element):
     label = label_element
 
-func show_message(msg):
+func show_message(msg, speed=0.025):
+    message_show_delay = speed
+
     current_message = msg
     current_character_idx = 0
     message_show_elapsed_time = 0

@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://elements/shrink_zone/ShrinkZone.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/images/pyramid.png" type="Texture" id=2]
-[ext_resource path="res://assets/images/particle.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/pyramid.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/particle.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -131,7 +130,7 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Emission Shape", "Initial Velocity", "Spread", "color_ramp", "scale_curve" ]
+_sections_unfolded = [ "Emission Shape", "Initial Velocity", "Scale", "Spread", "color_ramp", "scale_curve" ]
 
 [sub_resource type="RectangleShape2D" id=8]
 
@@ -151,13 +150,9 @@ audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Collision" ]
 
-[node name="ShrinkZone" parent="." instance=ExtResource( 1 )]
-scale = Vector2( 0.5, 0.5 )
-_sections_unfolded = [ "Collision", "Transform" ]
-
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 0.675131 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -188,7 +183,7 @@ visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 7 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 normal_map = null
 h_frames = 1
 v_frames = 1
@@ -203,7 +198,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( -1.18719, 14.6043 )
 enabled = true
 editor_only = false
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 offset = Vector2( 0, 0 )
 texture_scale = 5.0
 color = Color( 1, 1, 1, 1 )

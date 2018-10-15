@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://elements/spaceship/Spaceship.gd" type="Script" id=1]
 [ext_resource path="res://elements/bullet/Bullet.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/sounds/laser.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/crash.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/zone.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/drill.wav" type="AudioStream" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -105,7 +106,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=6]
 
 resource_name = "shrink"
-length = 0.5
+length = 1.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -113,12 +114,12 @@ tracks/0/path = NodePath("Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 10.5561 ),
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 10.5561 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.05, 0.05 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.05, 0.05 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:scale")
@@ -127,10 +128,22 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 7.45058e-09, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 7.45058e-09, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.01, 0.01 ) ]
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.5, 0.5 ), Vector2( 0.1, 0.1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles/Engine:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Gradient" id=7]
@@ -203,7 +216,7 @@ _sections_unfolded = [ "Initial Velocity", "Scale", "color_ramp" ]
 [sub_resource type="Gradient" id=12]
 
 offsets = PoolRealArray( 0, 1 )
-colors = PoolColorArray( 0.601562, 0.601562, 0.601562, 1, 1, 1, 1, 0 )
+colors = PoolColorArray( 0.324219, 0.324219, 0.324219, 1, 0.128906, 0.128906, 0.128906, 0 )
 
 [sub_resource type="GradientTexture" id=13]
 
@@ -265,7 +278,7 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Emission Shape", "Gravity", "Initial Velocity", "Radial Accel", "Scale", "Spread", "Tangential Accel", "color_ramp", "scale_curve" ]
+_sections_unfolded = [ "Color", "Emission Shape", "Gravity", "Initial Velocity", "Radial Accel", "Scale", "Spread", "Tangential Accel", "color_ramp", "scale_curve" ]
 
 [sub_resource type="Gradient" id=17]
 
@@ -358,14 +371,15 @@ move_speed = Vector2( 50, 200 )
 damping = 0.85
 shoot_cooldown = 0.1
 drill_cooldown = 0.75
-drill_time = 1
-invulnerability_time = 2
+drill_time = 0.75
 breaks_coef = 0.7
 rotation_speed = 1.5
+max_velocity = Vector2( 500, 300 )
+initial_velocity = Vector2( 400, 0 )
 Bullet = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.206, 0.206 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
@@ -388,12 +402,6 @@ one_shot = true
 autostart = false
 
 [node name="DrillCooldown" type="Timer" parent="."]
-process_mode = 1
-wait_time = 1.0
-one_shot = true
-autostart = false
-
-[node name="InvulnerabilityTimer" type="Timer" parent="."]
 process_mode = 1
 wait_time = 1.0
 one_shot = true
@@ -425,7 +433,7 @@ position = Vector2( 10.1442, 3.89517 )
 anchor_mode = 1
 rotating = true
 current = true
-zoom = Vector2( 1, 1 )
+zoom = Vector2( 0.05, 0.05 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
@@ -447,11 +455,11 @@ editor_draw_drag_margin = false
 _sections_unfolded = [ "Transform" ]
 
 [node name="Particles" type="Node2D" parent="."]
-editor/display_folded = true
+_sections_unfolded = [ "Transform" ]
 
 [node name="Engine" type="Particles2D" parent="Particles"]
 show_behind_parent = true
-position = Vector2( -8.5166, -0.283407 )
+position = Vector2( -16.2984, 0.0321486 )
 emitting = true
 amount = 10
 lifetime = 0.75
@@ -475,7 +483,7 @@ _sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Trans
 [node name="Drill" type="Particles2D" parent="Particles"]
 position = Vector2( 1.25896, -0.834911 )
 emitting = false
-amount = 160
+amount = 80
 lifetime = 0.5
 one_shot = false
 preprocess = 0.0
@@ -492,7 +500,7 @@ texture = ExtResource( 4 )
 normal_map = null
 h_frames = 1
 v_frames = 1
-_sections_unfolded = [ "Drawing", "Time", "Visibility", "process_material" ]
+_sections_unfolded = [ "Drawing", "Process Material", "Time", "Visibility", "process_material" ]
 
 [node name="Explosion" type="Particles2D" parent="Particles"]
 emitting = false
@@ -522,8 +530,8 @@ editor_only = false
 texture = ExtResource( 5 )
 offset = Vector2( 75, 0 )
 texture_scale = 0.8
-color = Color( 0.988235, 0.768627, 1, 1 )
-energy = 1.0
+color = Color( 1, 1, 1, 1 )
+energy = 1.1
 mode = 0
 range_height = 0.0
 range_z_min = -1024
@@ -586,6 +594,17 @@ area_mask = 1
 
 [node name="ZoneSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
+volume_db = -10.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Reverb Bus"
+area_mask = 1
+
+[node name="DrillSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
 volume_db = -10.0
 pitch_scale = 1.0
 autoplay = false

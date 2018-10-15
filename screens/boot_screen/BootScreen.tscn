@@ -1,7 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://screens/boot_screen/BootScreen.gd" type="Script" id=1]
-[ext_resource path="res://elements/pyramid/Pyramid.tscn" type="PackedScene" id=2]
+[ext_resource path="res://elements/starfield/Starfield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://elements/pyramid/Pyramid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/fonts/BEBAS.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/images/gwj2.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 72
+outline_size = 0
+outline_color = Color( 1, 1, 1, 1 )
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="Animation" id=1]
 
@@ -48,10 +61,49 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
 
-[node name="Pyramid" parent="." instance=ExtResource( 2 )]
-position = Vector2( 640, 333.517 )
+[node name="Starfield" parent="." instance=ExtResource( 2 )]
+margin_top = -1.0
+margin_bottom = -1.0
+
+[node name="Pyramid" parent="." instance=ExtResource( 3 )]
+position = Vector2( 330, 360 )
 scale = Vector2( 2, 2 )
 _sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="GWJ" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="GWJ"]
+modulate = Color( 0.870588, 0.247059, 0.247059, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 670.0
+margin_top = 240.0
+margin_right = 858.0
+margin_bottom = 557.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+custom_constants/line_spacing = 20
+text = "GODOT
+WILD
+JAM"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Grow Direction", "Visibility", "custom_fonts", "custom_fonts/font" ]
+
+[node name="Sprite" type="Sprite" parent="GWJ"]
+position = Vector2( 990, 360 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 anchor_left = 0.0

@@ -15,6 +15,9 @@ func load_title_screen():
     current_level = 0
     _change_scene("res://screens/title_screen/TitleScreen.tscn")
 
+func load_intro_screen():
+    _change_scene("res://screens/intro_screen/IntroScreen.tscn")
+
 func load_instructions_screen():
     _change_scene("res://screens/instructions_screen/InstructionsScreen.tscn")
 
