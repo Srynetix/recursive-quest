@@ -1,8 +1,17 @@
 extends Node
 
+################
 # Message system
 
-enum State { NONE, SHOWING, HIDING }
+# System state enumeration
+enum State {
+    NONE,       # Nothing shown
+    SHOWING,    # Message is showing
+    HIDING      # Message is hiding
+}
+
+##############
+# Private vars
 
 var state = State.NONE
 
@@ -16,11 +25,25 @@ var message_show_delay = 0.025
 var message_hide_elapsed_time = 0
 var message_hide_delay = 2
 
-func initialize(label_element):
-    label = label_element
+################
+# Public methods
 
-func show_message(msg, speed=0.025):
-    message_show_delay = speed
+func initialize(label_node):
+    """
+    Initialize system.
+
+    :param label_node:  Label node
+    """
+    label = label_node
+
+func show_message(msg, delay=0.025):
+    """
+    Show message.
+
+    :param msg:     Message to display
+    :param delay:   Message delay
+    """
+    message_show_delay = delay
 
     current_message = msg
     current_character_idx = 0
@@ -30,6 +53,9 @@ func show_message(msg, speed=0.025):
     label.modulate = Color(1, 1, 1, 0)
 
     _set_state(State.SHOWING)
+
+#################
+# Private methods
 
 func _set_state(value):
     state = value
@@ -71,6 +97,9 @@ func _update_message(delta):
         if should_hide:
             label.text = ""
             _set_state(State.NONE)
+
+###################
+# Lifecycle methods
 
 func _process(delta):
     if state != State.NONE:

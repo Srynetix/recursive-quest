@@ -1,13 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://screens/game_over_screen/GameOverScreen.gd" type="Script" id=1]
 [ext_resource path="res://elements/tileset/Tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://assets/images/pyramid.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/BEBAS.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://elements/treasure/Treasure.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 
 size = 64
+outline_size = 0
+outline_color = Color( 1, 1, 1, 1 )
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Settings" ]
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 34
 outline_size = 0
 outline_color = Color( 1, 1, 1, 1 )
 use_mipmaps = false
@@ -107,4 +118,43 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts", "custom_fonts/font" ]
+
+[node name="SubLabel" type="Label" parent="."]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 410.0
+margin_top = 390.0
+margin_right = 876.0
+margin_bottom = 485.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+text = "Get every treasure to
+get the real ending"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts", "custom_fonts/font" ]
+
+[node name="Treasures" type="Node2D" parent="."]
+_sections_unfolded = [ "Transform" ]
+
+[node name="Triangle" parent="Treasures" instance=ExtResource( 5 )]
+position = Vector2( 320, 590 )
+
+[node name="Quad" parent="Treasures" instance=ExtResource( 5 )]
+position = Vector2( 640, 580 )
+treasure_name = "Quad"
+
+[node name="Hex" parent="Treasures" instance=ExtResource( 5 )]
+position = Vector2( 970, 590 )
+treasure_name = "Hex"
 

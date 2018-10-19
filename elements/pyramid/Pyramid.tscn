@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/images/pyramid.png" type="Texture" id=1]
-[ext_resource path="res://assets/images/particle.png" type="Texture" id=2]
+[ext_resource path="res://elements/pyramid/Pyramid.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/pyramid.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/particle.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 
@@ -119,7 +120,7 @@ damping = 30.0
 damping_random = 0.0
 angle = 0.0
 angle_random = 0.0
-scale = 2.0
+scale = 0.1
 scale_random = 0.0
 scale_curve = SubResource( 6 )
 color_ramp = SubResource( 4 )
@@ -135,7 +136,7 @@ _sections_unfolded = [ "Emission Shape", "Initial Velocity", "Scale", "Spread", 
 [sub_resource type="RectangleShape2D" id=8]
 
 custom_solver_bias = 0.0
-extents = Vector2( 21.4766, 56.4916 )
+extents = Vector2( 40, 80 )
 
 [node name="Pyramid" type="Area2D" groups=[
 "pyramid",
@@ -148,11 +149,13 @@ angular_damp = 1.0
 collision_layer = 8
 audio_bus_override = false
 audio_bus_name = "Master"
+script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
+shrunk = false
+hidden = false
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 0.675131 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -167,7 +170,7 @@ blend_times = [  ]
 
 [node name="Particles2D" type="Particles2D" parent="."]
 show_behind_parent = true
-position = Vector2( 2, 30.6751 )
+position = Vector2( 2, 30 )
 rotation = 1.5708
 emitting = true
 amount = 100
@@ -183,7 +186,7 @@ visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 7 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 normal_map = null
 h_frames = 1
 v_frames = 1
@@ -192,13 +195,13 @@ _sections_unfolded = [ "Drawing", "Process Material", "Time", "Transform", "Visi
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 3.1257, 1.75868 )
 shape = SubResource( 8 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "shape" ]
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( -1.18719, 14.6043 )
 enabled = true
 editor_only = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 offset = Vector2( 0, 0 )
 texture_scale = 5.0
 color = Color( 1, 1, 1, 1 )

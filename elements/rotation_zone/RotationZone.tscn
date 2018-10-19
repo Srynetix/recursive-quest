@@ -90,6 +90,7 @@ _sections_unfolded = [ "Collision" ]
 rotation_value = 0
 
 [node name="Particles2D" type="Particles2D" parent="."]
+visible = false
 emitting = true
 amount = 90
 lifetime = 2.0

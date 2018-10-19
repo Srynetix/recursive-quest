@@ -57,7 +57,7 @@ damping = 0.0
 damping_random = 0.0
 angle = 0.0
 angle_random = 0.0
-scale = 1.0
+scale = 0.25
 scale_random = 0.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
@@ -90,7 +90,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="Particles2D" type="Particles2D" parent="."]
 emitting = true
-amount = 180
+amount = 90
 lifetime = 1.0
 one_shot = false
 preprocess = 0.0

@@ -131,4 +131,5 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="Spaceship" parent="." instance=ExtResource( 6 )]
 position = Vector2( -159.355, 158.601 )
+max_velocity = Vector2( 400, 300 )
 

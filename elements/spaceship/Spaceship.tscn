@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://elements/spaceship/Spaceship.gd" type="Script" id=1]
 [ext_resource path="res://elements/bullet/Bullet.tscn" type="PackedScene" id=2]
@@ -114,12 +114,12 @@ tracks/0/path = NodePath("Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 10.5561 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.05, 0.05 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.25, 0.25 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:scale")
@@ -131,7 +131,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 7.45058e-09, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.5, 0.5 ), Vector2( 0.1, 0.1 ) ]
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.5, 0.5 ), Vector2( 0.025, 0.025 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Particles/Engine:emitting")
@@ -145,34 +145,132 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Label:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.5, 0.5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Label:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -75, -47 ), Vector2( -47, -32 ) ]
+}
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Animation" id=7]
+
+resource_name = "surprise"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 4, 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 0.85 ), Vector2( 12, 12 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.1, 2.0 ]
+}
+
+[sub_resource type="Animation" id=8]
+
+resource_name = "win"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles/Engine:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Gradient" id=9]
 
 offsets = PoolRealArray( 0, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=8]
+[sub_resource type="GradientTexture" id=10]
 
 flags = 4
-gradient = SubResource( 7 )
+gradient = SubResource( 9 )
 width = 2048
 _sections_unfolded = [ "gradient" ]
 
-[sub_resource type="Curve" id=9]
+[sub_resource type="Curve" id=11]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.999306, 0.0072 ), -3.08428, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=10]
+[sub_resource type="CurveTexture" id=12]
 
 flags = 4
 width = 2048
-curve = SubResource( 9 )
+curve = SubResource( 11 )
 _sections_unfolded = [ "curve" ]
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=13]
 
 render_priority = 0
 trail_divisor = 1
@@ -202,8 +300,8 @@ angle = 0.0
 angle_random = 0.0
 scale = 0.25
 scale_random = 0.0
-scale_curve = SubResource( 10 )
-color_ramp = SubResource( 8 )
+scale_curve = SubResource( 12 )
+color_ramp = SubResource( 10 )
 hue_variation = 0.5
 hue_variation_random = 1.0
 anim_speed = 0.0
@@ -213,33 +311,33 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Initial Velocity", "Scale", "color_ramp" ]
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=14]
 
 offsets = PoolRealArray( 0, 1 )
 colors = PoolColorArray( 0.324219, 0.324219, 0.324219, 1, 0.128906, 0.128906, 0.128906, 0 )
 
-[sub_resource type="GradientTexture" id=13]
+[sub_resource type="GradientTexture" id=15]
 
 flags = 4
-gradient = SubResource( 12 )
+gradient = SubResource( 14 )
 width = 2048
 _sections_unfolded = [ "gradient" ]
 
-[sub_resource type="Curve" id=14]
+[sub_resource type="Curve" id=16]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=15]
+[sub_resource type="CurveTexture" id=17]
 
 flags = 4
 width = 2048
-curve = SubResource( 14 )
+curve = SubResource( 16 )
 _sections_unfolded = [ "curve" ]
 
-[sub_resource type="ParticlesMaterial" id=16]
+[sub_resource type="ParticlesMaterial" id=18]
 
 render_priority = 0
 trail_divisor = 1
@@ -269,8 +367,8 @@ angle = 0.0
 angle_random = 0.0
 scale = 0.5
 scale_random = 0.0
-scale_curve = SubResource( 15 )
-color_ramp = SubResource( 13 )
+scale_curve = SubResource( 17 )
+color_ramp = SubResource( 15 )
 hue_variation = 0.0
 hue_variation_random = 0.0
 anim_speed = 0.0
@@ -280,33 +378,33 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Emission Shape", "Gravity", "Initial Velocity", "Radial Accel", "Scale", "Spread", "Tangential Accel", "color_ramp", "scale_curve" ]
 
-[sub_resource type="Gradient" id=17]
+[sub_resource type="Gradient" id=19]
 
 offsets = PoolRealArray( 0, 1 )
 colors = PoolColorArray( 0.299103, 0, 0.316406, 1, 0.546875, 0, 1, 0 )
 
-[sub_resource type="GradientTexture" id=18]
+[sub_resource type="GradientTexture" id=20]
 
 flags = 4
-gradient = SubResource( 17 )
+gradient = SubResource( 19 )
 width = 2048
 _sections_unfolded = [ "gradient" ]
 
-[sub_resource type="Curve" id=19]
+[sub_resource type="Curve" id=21]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0.00782728, 0.0688 ), 0.0, 2.46743, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=20]
+[sub_resource type="CurveTexture" id=22]
 
 flags = 4
 width = 2048
-curve = SubResource( 19 )
+curve = SubResource( 21 )
 _sections_unfolded = [ "curve" ]
 
-[sub_resource type="ParticlesMaterial" id=21]
+[sub_resource type="ParticlesMaterial" id=23]
 
 render_priority = 0
 trail_divisor = 1
@@ -336,8 +434,8 @@ angle = 0.0
 angle_random = 0.0
 scale = 10.0
 scale_random = 0.0
-scale_curve = SubResource( 20 )
-color_ramp = SubResource( 18 )
+scale_curve = SubResource( 22 )
+color_ramp = SubResource( 20 )
 hue_variation = 0.0
 hue_variation_random = 0.0
 anim_speed = 0.0
@@ -347,7 +445,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angular Velocity", "Emission Shape", "Initial Velocity", "color_ramp", "scale_curve" ]
 
-[sub_resource type="DynamicFont" id=22]
+[sub_resource type="DynamicFont" id=24]
 
 size = 24
 outline_size = 1
@@ -367,15 +465,17 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
+disabled = false
 move_speed = Vector2( 50, 200 )
+autopilot_speed = Vector2( 200, 200 )
 damping = 0.85
-shoot_cooldown = 0.1
-drill_cooldown = 0.75
-drill_time = 0.75
-breaks_coef = 0.7
+breaks_force = 0.7
 rotation_speed = 1.5
 max_velocity = Vector2( 500, 300 )
 initial_velocity = Vector2( 400, 0 )
+shoot_cooldown = 0.1
+drill_cooldown = 0.75
+drill_time = 0.75
 Bullet = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -418,6 +518,8 @@ anims/explosion = SubResource( 3 )
 anims/fade = SubResource( 4 )
 anims/idle = SubResource( 5 )
 anims/shrink = SubResource( 6 )
+anims/surprise = SubResource( 7 )
+anims/win = SubResource( 8 )
 blend_times = [  ]
 
 [node name="Turrets" type="Node2D" parent="."]
@@ -433,7 +535,7 @@ position = Vector2( 10.1442, 3.89517 )
 anchor_mode = 1
 rotating = true
 current = true
-zoom = Vector2( 0.05, 0.05 )
+zoom = Vector2( 1, 1 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
@@ -473,12 +575,12 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 11 )
+process_material = SubResource( 13 )
 texture = ExtResource( 4 )
 normal_map = null
 h_frames = 1
 v_frames = 1
-_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform", "process_material" ]
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform", "Visibility", "process_material" ]
 
 [node name="Drill" type="Particles2D" parent="Particles"]
 position = Vector2( 1.25896, -0.834911 )
@@ -495,7 +597,7 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 16 )
+process_material = SubResource( 18 )
 texture = ExtResource( 4 )
 normal_map = null
 h_frames = 1
@@ -516,7 +618,7 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 21 )
+process_material = SubResource( 23 )
 texture = null
 normal_map = null
 h_frames = 1
@@ -563,12 +665,12 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 22 )
+custom_fonts/font = SubResource( 24 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Visibility", "custom_fonts/font" ]
+_sections_unfolded = [ "Rect", "Visibility", "custom_fonts/font" ]
 
 [node name="LaserSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
@@ -594,7 +696,7 @@ area_mask = 1
 
 [node name="ZoneSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
-volume_db = -10.0
+volume_db = -20.0
 pitch_scale = 1.0
 autoplay = false
 stream_paused = false

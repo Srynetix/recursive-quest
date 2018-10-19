@@ -1,6 +1,10 @@
 tool
 extends Area2D
 
+######################
+# Rotation zone script
+
+# Rotation value enum
 enum Rotation {
     E = 0,
     SE = 45,
@@ -12,7 +16,14 @@ enum Rotation {
     NE = 315
 }
 
+###############
+# Exported vars
+
+# Rotation value (default: East)
 export (Rotation) var rotation_value = Rotation.E
+
+#################
+# Private methods
 
 func _set_label():
     var ch
@@ -36,6 +47,9 @@ func _set_label():
 
     if $Label.text != ch:
         $Label.text = ch
+
+###################
+# Lifecycle methods
 
 func _ready():
     _set_label()

@@ -1,19 +1,40 @@
 extends RigidBody2D
 
+#############
+# Rock script
+
+# Exploded signal
+#   - size: Rock size
+#   - radius: Rock radius
+#   - pos: Rock position
+#   - vel: Rock velocity
 signal exploded(size, radius, pos, vel)
 
-export (Vector2) var linear_velocity_fix = Vector2(-150, -150)
+###############
+# Exported vars
+
+# Base linear velocity
+export (Vector2) var base_linear_velocity = Vector2(-150, -150)
+
+##############
+# Private vars
 
 var size
 var radius
 var scale_factor = 0.5
 var is_sub_rock = false
 
-func _ready():
-    if !is_sub_rock:
-        start(position, linear_velocity_fix, 2)
+################
+# Public methods
 
 func start(pos, vel, start_size):
+    """
+    Start rock.
+
+    :param pos: Rock position
+    :param vel: Rock velocity
+    :param start_size: Starting size
+    """
     position = pos
     size = start_size
     mass = 1.5 * size
@@ -30,6 +51,7 @@ func start(pos, vel, start_size):
     angular_velocity = rand_range(-1.5, 1.5)
 
 func explode():
+    """Explode rock."""
     $ExplodeSound.play()
 
     layers = 0
@@ -42,3 +64,10 @@ func explode():
     $AnimationPlayer.play("explode")
     yield($AnimationPlayer, "animation_finished")
     queue_free()
+
+###################
+# Lifecycle methods
+
+func _ready():
+    if !is_sub_rock:
+        start(position, base_linear_velocity, 2)

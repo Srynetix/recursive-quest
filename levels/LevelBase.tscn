@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://levels/Level.gd" type="Script" id=1]
+[ext_resource path="res://elements/spaceship/Spaceship.tscn" type="PackedScene" id=2]
+[ext_resource path="res://elements/pyramid/Pyramid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://elements/hud/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sounds/178113__trebblofang__spaceship-engineroom-1.ogg" type="AudioStream" id=5]
+
+[node name="LevelBase" type="Node2D"]
+script = ExtResource( 1 )
+level_id = 0
+level_title = ""
+base_time_left = 60
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 1, 1, 1, 1 )
+
+[node name="Layers" type="Node2D" parent="."]
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="Texts" type="Node2D" parent="."]
+
+[node name="Rocks" type="Node2D" parent="."]
+
+[node name="Barriers" type="Node2D" parent="."]
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Spaceship" parent="Objects" instance=ExtResource( 2 )]
+
+[node name="Pyramid" parent="Objects" instance=ExtResource( 3 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 4 )]
+
+[node name="TimeLeftTimer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+pitch_scale = 1.0
+autoplay = true
+stream_paused = false
+mix_target = 0
+bus = "Master"
+
