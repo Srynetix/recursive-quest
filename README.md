@@ -14,7 +14,7 @@ At the end of a level, you are in front of a small pyramid replica and are magic
 
 There are 4 levels. Try to get the all the treasures to get the happy end!
 
-Most graphics and sounds are super basic and they were drawn and generated during the jam, using GIMP, Inkscape and Chiptone. For the code, I have only reused my virtual input from a precedent project for the Android export, everything else was done on the fly. I will open-source the game after the jam.
+Most graphics and sounds are super basic and they were drawn and generated during the jam, using GIMP, Inkscape and Chiptone. For the code, I have only reused my virtual input from a precedent project for the Android export, everything else was done on the fly. I will open-source the game after the jam here: https://github.com/Srynetix/gwj2-recursive-quest
 
 ## Exports
 
