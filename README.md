@@ -2,7 +2,9 @@
 
 Hello, here is my submission, my first "complete" Godot game: **Recursive Quest**
 
-I did a challenging fast-paced shooter game, where you are exploring a space pyramid in quest for treasures.
+![screenshot](docs/screen5.png)
+
+It is a challenging fast-paced shooter game, where you are exploring a space pyramid in quest for treasures.
 
 The gameplay is simple: you control a spaceship (with the arrow keys / joystick) that always goes forward to the right of the screen.  
 To turn, you don't turn your ship, you turn the pyramid using rotation zones.  
@@ -16,6 +18,6 @@ Most graphics and sounds are super basic and they were drawn and generated durin
 
 ## Exports
 
-- Windows/Linux: They should be stable, without many lags (I recommend to play with this version)
-- Android: Working, but a little difficult since the joystick is a little small (on my phone at least)
+- Windows/Linux/MacOS: They should be stable, without many lags (I recommend to play with this version)
+- Android (Debug build): Working, but a little difficult since the joystick is a little small (on my phone at least).
 - HTML: Very laggy and only works on Firefox (black screen on Chrome)

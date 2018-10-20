@@ -134,10 +134,8 @@ disabled = false
 
 [node name="Spaceship" parent="." instance=ExtResource( 4 )]
 position = Vector2( 454.014, 395.576 )
-disabled = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -185,7 +183,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
-text = "Press \"W\" to START"
+text = "Press 'X' to START"
 align = 1
 valign = 1
 percent_visible = 1.0

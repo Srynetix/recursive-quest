@@ -68,6 +68,7 @@ margin_bottom = -1.0
 position = Vector2( 330, 360 )
 scale = Vector2( 2, 2 )
 _sections_unfolded = [ "Collision", "Transform" ]
+disabled = false
 
 [node name="GWJ" type="Node2D" parent="."]
 

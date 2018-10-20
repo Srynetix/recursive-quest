@@ -138,39 +138,30 @@ editor/display_folded = true
 
 [node name="Barrier" parent="Barriers" instance=ExtResource( 5 )]
 position = Vector2( 1998.56, 4304.52 )
-physics_material_override = null
 
 [node name="Barrier2" parent="Barriers" instance=ExtResource( 5 )]
 position = Vector2( 3911.66, 4311.02 )
-physics_material_override = null
 
 [node name="Barrier3" parent="Barriers" instance=ExtResource( 5 )]
 position = Vector2( 4943.04, 4304.52 )
-physics_material_override = null
 
 [node name="Barrier4" parent="Barriers" instance=ExtResource( 5 )]
 position = Vector2( 4669.82, 3970.58 )
-physics_material_override = null
 
 [node name="Barrier5" parent="Barriers" instance=ExtResource( 5 )]
 position = Vector2( 3721.12, 3959.19 )
-physics_material_override = null
 
 [node name="Barrier6" parent="Barriers" instance=ExtResource( 5 )]
 position = Vector2( 2605.45, 3966.78 )
-physics_material_override = null
 
 [node name="Barrier7" parent="Barriers" instance=ExtResource( 5 )]
 position = Vector2( 1584.65, 3962.99 )
-physics_material_override = null
 
 [node name="Barrier8" parent="Barriers" instance=ExtResource( 5 )]
 position = Vector2( 2187.82, 3607.48 )
-physics_material_override = null
 
 [node name="Barrier9" parent="Barriers" instance=ExtResource( 5 )]
 position = Vector2( 3478.05, 3603.48 )
-physics_material_override = null
 
 [node name="Texts" type="Node2D" parent="."]
 
@@ -192,7 +183,7 @@ text_speed = 0.02
 [node name="TextZone3" parent="Texts" instance=ExtResource( 6 )]
 position = Vector2( 5679.75, 4656.36 )
 text = "Dodge rocks or shoot them
-with the 'W' or 'Z' key."
+with the 'X' key."
 mobile_text = "Dodge rocks or shoot them
 with the A button."
 
@@ -204,7 +195,7 @@ in 2 parts."
 [node name="TextZone4" parent="Texts" instance=ExtResource( 6 )]
 position = Vector2( 952.996, 4350.64 )
 text = "You can drill into fragile walls
-with the 'X' key."
+with the 'C' key."
 mobile_text = "You can drill into fragile walls
 with the B button."
 
@@ -239,7 +230,6 @@ editor/display_folded = true
 
 [node name="Spaceship" parent="Objects" instance=ExtResource( 7 )]
 position = Vector2( 242.643, 4963.08 )
-disabled = false
 
 [node name="Pyramid" parent="Objects" instance=ExtResource( 8 )]
 position = Vector2( 3405.77, 1189.21 )

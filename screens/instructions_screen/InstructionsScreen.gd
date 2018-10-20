@@ -22,6 +22,11 @@ func _ready():
     $Elements/Rock.linear_velocity = Vector2(0, 0)
     $Camera2D.current = true
 
+    if Utils.is_system_mobile():
+        $CanvasLayer/HUD/MarginContainer/VBoxContainer3/HBoxContainer/Label7.text = "Touch screen to start"
+    else:
+        $CanvasLayer/HUD/MarginContainer/VBoxContainer3/HBoxContainer/Label7.text = "Press 'X' to start"
+
 func _process(delta):
     if Input.is_action_just_pressed("shoot"):
         _load_next()

@@ -20,7 +20,7 @@ export (float) var shape_scale = 1
 
 func get_text():
     """Get text."""
-    if _is_mobile() and mobile_text != "":
+    if Utils.is_system_mobile() and mobile_text != "":
         return mobile_text
     else:
         return text
@@ -28,13 +28,6 @@ func get_text():
 func get_text_speed():
     """Get text speed."""
     return text_speed
-
-#################
-# Private methods
-
-func _is_mobile():
-    var os_name = OS.get_name()
-    return os_name == "Android" or os_name == "iOS"
 
 ###################
 # Lifecycle methods
